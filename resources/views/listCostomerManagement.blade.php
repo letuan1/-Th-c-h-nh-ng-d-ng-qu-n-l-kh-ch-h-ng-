@@ -23,6 +23,8 @@
                     <th scope="col">Tên khách hàng</th>
                     <th scope="col">Ngày Sinh</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,13 +37,16 @@
                         <tr>
                             <th scope="row">{{ ++$key }}</th>
                             <td>{{ $customer['name'] }}</td>
-                            <td>{{ $customer['bod'] }}</td>
+                            <td>{{ $customer['dob'] }}</td>
                             <td>{{ $customer['email'] }}</td>
+                            <td><a href="{{ route('getDataId', $customer->id) }}">Update</a></td>
+                            <td><a href="{{ route('delete', $customer->id) }}">Delete</a></td>
                         </tr>
                     @endforeach
                 @endif
                 </tbody>
             </table>
+            {{ $customers->links() }}
         </div>
     </div>
 </div>

@@ -12,3 +12,9 @@
 */
 
 Route::get('/', 'CusromerController@index')->name('list');
+
+Route::get('/delete/{id}', 'CusromerController@delete')->name('delete');
+
+Route::get('/update/{id}', 'CusromerController@getDataId')->name('getDataId');
+
+Route::post('/update/{id}', 'CusromerController@update')->name('update');

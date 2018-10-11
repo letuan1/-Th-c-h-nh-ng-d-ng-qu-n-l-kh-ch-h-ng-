@@ -2,36 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Cusroner;
 use Illuminate\Http\Request;
 
 class CusromerController extends Controller
 {
     public function index()
     {
-        $customers = [
-            '0' => [
-                'id' => 1,
-                'name' => 'customer1',
-                'bod' => '1998-09-01',
-                'email' => 'customer1@gmail.com'
-            ],
-
-            '1' => [
-                'id' => 2,
-                'name' => 'customer2',
-                'bod' => '1998-09-01',
-                'email' => 'customer2@gmail.com'
-            ],
-
-            '2' => [
-                'id' => 3,
-                'name' => 'customer3',
-                'bod' => '1998-09-01',
-                'email' => 'customer3@gmail.com'
-            ]
-        ];
-
+        $customers = Cusroner::paginate(10);
         return view('listCostomerManagement', ['customers' => $customers]);
 
+    }
+
+    public function delete($id) {
+        $customer = Cusroner::find($id)
+            ->delete();
+        return redirect()->route('list');
+    }
+
+    public function update(Request $request, $id) {
+        $update = Cusroner::where('id',$id)
+            ->update([
+            'name' => "$request->name",
+            'dob' => "$request->dob",
+            'email' => "$request->email",
+        ]);
+
+        return redirect(route('list'));
+    }
+
+    public function getDataId($id) {
+        $getData = Cusroner::find($id);
+        return view('update',
+            [
+                'getData' => $getData,
+                'id' => $id,
+            ]);
     }
 }
