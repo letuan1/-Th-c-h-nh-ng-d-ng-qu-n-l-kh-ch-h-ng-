@@ -16,6 +16,16 @@
     <div class="col-12">
         <div class="row">
             <h1>Danh Sách Khách Hàng</h1>
+            <div class="col-12">
+                @if (Session::has('success'))
+                    <p class="text-success">
+                        <i class="fa fa-check" aria-hidden="true"></i>{{ Session::get('success') }}
+                    </p>
+                @endif
+            </div>
+            <a href="{{ route('viewInsert') }}">Add new customer</a>
+            {{--<a href="{!! route('user.change-language', ['en']) !!}">English</a>--}}
+            {{--<a href="{!! route('user.change-language', ['vi']) !!}">Vietnam</a>--}}
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -23,8 +33,8 @@
                     <th scope="col">Tên khách hàng</th>
                     <th scope="col">Ngày Sinh</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Update</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">sửa</th>
+                    <th scope="col">xóa</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,8 +49,8 @@
                             <td>{{ $customer['name'] }}</td>
                             <td>{{ $customer['dob'] }}</td>
                             <td>{{ $customer['email'] }}</td>
-                            <td><a href="{{ route('getDataId', $customer->id) }}">Update</a></td>
-                            <td><a href="{{ route('delete', $customer->id) }}">Delete</a></td>
+                            <td><a href="{{ route('getDataId', $customer->id) }}">Sửa</a></td>
+                            <td><a href="{{ route('delete', $customer->id) }}">Xóa</a></td>
                         </tr>
                     @endforeach
                 @endif

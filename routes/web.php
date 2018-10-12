@@ -11,10 +11,19 @@
 |
 */
 
-Route::get('/', 'CusromerController@index')->name('list');
+Route::group(['middleware' => 'locale'], function () {
+    Route::get('change-language/{language}', 'CusromerController@changeLanguage')
+        ->name('user.change-language');
 
-Route::get('/delete/{id}', 'CusromerController@delete')->name('delete');
+    Route::get('/', 'CusromerController@index')->name('list');
 
-Route::get('/update/{id}', 'CusromerController@getDataId')->name('getDataId');
+    Route::get('/delete/{id}', 'CusromerController@delete')->name('delete');
 
-Route::post('/update/{id}', 'CusromerController@update')->name('update');
+    Route::get('/update/{id}', 'CusromerController@getDataId')->name('getDataId');
+
+    Route::post('/update/{id}', 'CusromerController@update')->name('update');
+
+    Route::post('/insert', 'CusromerController@insert')->name('insert');
+
+    Route::get('/view-insert', 'CusromerController@viewInsert')->name('viewInsert');
+});
